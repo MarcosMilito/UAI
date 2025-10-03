@@ -1,69 +1,71 @@
+<!DOCTYPE html>
 <html lang="es">
-    <head charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Futbol para Todos</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clubes</title>
+  <style>
+    :root{
+      --tile-size: 280px;
+      --radius:16px;
+      --shadow:0 10px 24px rgba(0,0,0,.18);
+      --text:#e5e7eb; 
+      --label-bg:rgba(0,0,0,.55);
+    }
+    body{
+      margin:0; background:transparent; color:var(--text);
+      font:16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:20px 16px 26px;}
+    h2{margin:0 0 14px 0; font-size:clamp(20px,2.4vw,26px); color:#f8fafc;}
+    .grid{display:flex; flex-wrap:wrap; gap:22px;}
+
+    .tile{
+      position:relative; display:block; width:var(--tile-size); height:var(--tile-size);
+      border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow);
+      background:center/cover no-repeat; 
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .tile::before{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,.35) 100%);
+    }
+    .tile:hover{transform:scale(1.025); box-shadow:0 16px 36px rgba(0,0,0,.28);}
+    .label{
+      position:absolute; left:10px; bottom:10px; z-index:2;
+      background:var(--label-bg); color:#fff; padding:6px 10px; border-radius:12px;
+      font-weight:700; letter-spacing:.4px; text-transform:uppercase; font-size:13px;
+    }
    
-    </head>
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>Información General</h2>
 
-<body style="background-color:whitesmoke">
-    <section>
-        <h2>Alguno de nuestros Clubes</h2>
+    <div class="grid">
+        <a class="tile"
+            href="Tablas.html"
+            target="_blank" rel="noopener"
+            style="background-image:url('https://elargentinodiario.com.ar/wp-content/uploads/2025/01/wp-173697604525733011862749687485.jpg')">
+            <span class="label">Tabla Anual</span>
+        </a>
 
-        <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:stretch;">
-            <a href="#River Plate"
-                style="display:block; width:300px; height:300px; 
-                    background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Escudo_del_C_A_River_Plate.svg/250px-Escudo_del_C_A_River_Plate.svg.png') center/cover no-repeat;
-                    border-radius:12px; overflow:hidden; box-shadow:0 4px 10px black"
-                onmouseover="this.style.transform='scale(1.02)'" 
-                onmouseout="this.style.transform='scale(1)'">
-                <span style="position:absolute; bottom:8px; left:8px; 
-                            background:black; color:rgb(255, 255, 255); 
-                            padding:2px 12px; border-radius:8px; 
-                            font-weight:400;text-transform: uppercase;">
-                River Plate
-                </span>
-            </a>
-            <a href="#Boca Juniors"
-                style="display:block; width:300px; height:300px; 
-                    background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/CABJ70.png/250px-CABJ70.png') center/cover no-repeat;
-                    border-radius:12px; overflow:hidden; box-shadow:0 4px 10px black"
-                onmouseover="this.style.transform='scale(1.02)'" 
-                onmouseout="this.style.transform='scale(1)'">
-                <span style="position:absolute; bottom:8px; left:8px; 
-                            background:black; color:rgb(255, 255, 255); 
-                            padding:2px 12px; border-radius:8px; 
-                            font-weight:400;text-transform: uppercase;">
-                Boca Juniors
-                </span>
-            </a>
+      <a class="tile" href="#futbolistas"
+         style="background-image:url('https://static01.nyt.com/images/2021/07/09/sports/09rorynewsletter-ESP-00/09rory-top2-mediumSquareAt3X-v2.jpg')">
+        <span class="label">Clubes y Futbolistas destacados</span>
+      </a>
 
-            <a href="#FC Barcelona"
-                style="display:block; width:300px; height:300px; 
-                    background:url('https://a.espncdn.com/i/teamlogos/soccer/500/83.png') center/cover no-repeat;
-                    border-radius:12px; overflow:hidden; box-shadow:0 4px 10px black"
-                onmouseover="this.style.transform='scale(1.02)'" 
-                onmouseout="this.style.transform='scale(1)'">
-                <span style="position:absolute; bottom:8px; left:8px; 
-                            background:black; color:rgb(255, 255, 255); 
-                            padding:2px 12px; border-radius:8px; 
-                            font-weight:400;text-transform: uppercase;">
-                FC Barcelona
-                </span>
-            </a>
-                <a href="#Real Madrid FC"
-                style="display:block; width:300px; height:300px; 
-                    background:url('https://upload.wikimedia.org/wikipedia/en/thumb/5/56/Real_Madrid_CF.svg/250px-Real_Madrid_CF.svg.png') center/cover no-repeat;
-                    border-radius:12px; overflow:hidden; box-shadow:0 4px 10px black"
-                onmouseover="this.style.transform='scale(1.02)'" 
-                onmouseout="this.style.transform='scale(1)'">
-                <span style="position:absolute; bottom:8px; left:8px; 
-                            background:black; color:rgb(255, 255, 255); 
-                            padding:2px 12px; border-radius:8px; 
-                            font-weight:400;text-transform: uppercase;">
-                Real Madrid FC
-                </span>
-            </a>
-        </div>
-    </section>
+       <a class="tile" href="#proximospartidos"
+         style="background-image:url('https://img.pikbest.com/wp/202405/nighttime-view-of-a-3d-rendered-football-stadium_9798284.jpg!w700wp')">
+        <span class="label">Proximos Partidos</span>
+      </a>
 
+      <a class="tile" href="#tienda"
+         style="background-image:url('https://i.pinimg.com/736x/95/d0/28/95d028d025dce543f046ee4468f3fbcc.jpg')">
+        <span class="label">Tienda</span>
+      </a>
+    </div>
+  </div>
 </body>
+</html>
