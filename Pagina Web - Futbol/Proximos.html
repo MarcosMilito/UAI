@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Próximos partidos | Fútbol para Todos</title>
+  <style>
+    :root{
+      --text:#e5e7eb; --muted:#cbd5e1; --brand:#0b57d0;
+      --panel: rgba(17,24,39,.66); --panel-border: rgba(148,163,184,.28);
+      --radius:16px; --max:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:
+        linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
+        url("https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg") center/cover fixed no-repeat;
+      color:var(--text);
+      font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    }
+    /* Header */
+    .nav{position:sticky; top:0; z-index:50; background:#130e0ecc; border-bottom:1px solid #2b2f36; backdrop-filter:blur(6px)}
+    .nav__inner{max-width:var(--max); margin:0 auto; padding:10px 16px; display:flex; justify-content:space-between; align-items:center;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:700}
+    .brand__dot{width:10px; height:10px; border-radius:999px; background:var(--brand)}
+    .nav a{color:var(--text); text-decoration:none; padding:8px 10px; border-radius:10px}
+    .nav a:hover{background:rgba(255,255,255,.08)}
+
+    /* Contenido */
+    .wrap{max-width:var(--max); margin:18px auto 28px; padding:0 16px;}
+    .panel{background:var(--panel); border:1px solid var(--panel-border); border-radius:var(--radius);
+           backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); padding:16px;}
+    h1{margin:0 0 10px; font-size:clamp(22px,3vw,32px)}
+    .fx-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(320px,1fr));}
+    .fx-card{background:rgba(17,24,39,.55); border:1px solid var(--panel-border); border-radius:14px; padding:14px;
+             backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);}
+    .fx-title{margin:0 0 6px 0; font-weight:800;}
+    .fx-meta{margin:0 10px 10px 0; color:var(--muted); font-size:14px;}
+    .btn-map{display:inline-block; padding:8px 12px; border-radius:10px; border:1px solid var(--panel-border);
+             background:rgba(255,255,255,.06); color:#e5e7eb; cursor:pointer; font-weight:700;}
+    .btn-map:hover{background:rgba(255,255,255,.12)}
+    .fx-map{width:100%; height:220px; border:0; border-radius:10px; margin-top:10px; display:none;}
+    .fx-map.show{display:block}
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="brand"><span class="brand__dot"></span> Fútbol para Todos</div>
+      <nav><a href="Portada.html">Volver a la portada</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+        <style>
+            .sched h2{margin:0 0 10px 2px; font-size:clamp(18px,2.2vw,22px)}
+            .tbl-wrap{overflow:auto; border-radius:12px;}
+            table.fixture{width:100%; border-collapse:collapse; min-width:760px; color:#e5e7eb;}
+            table.fixture thead th{
+            position:sticky; top:0; z-index:2;
+            background:rgba(2,6,23,.85); backdrop-filter:blur(6px);
+            text-align:left; font-weight:700; font-size:14px;
+            padding:10px 12px; border-bottom:1px solid rgba(148,163,184,.28);
+            }
+            table.fixture tbody td{
+            padding:10px 12px; font-size:14px;
+            border-bottom:1px solid rgba(148,163,184,.18);
+            vertical-align:top;
+            }
+            .col-partido{width:48%; font-weight:600;}
+            .col-hora{width:12%; white-space:nowrap;}
+            .col-lugar{width:40%; color:#cbd5e1;}
+            tr:hover{background:rgba(255,255,255,.04);}
+            .map-row td{padding:0 12px 12px 12px; background:rgba(255,255,255,.02);}
+            .map{width:100%; height:230px; border:0; border-radius:10px;}
+            /* Mobile: pila columnas */
+            @media (max-width:700px){
+            thead{display:none;}
+            table.fixture, tbody, tr, td{display:block; width:100%;}
+            .col-partido{font-size:16px; padding-top:12px}
+            .col-hora,.col-lugar{color:#cbd5e1}
+            tbody td{border:none; padding:4px 12px}
+            .map-row td{padding:0 12px 14px}
+            tr{border-bottom:1px solid rgba(148,163,184,.18)}
+            }
+        </style>
+
+        <div class="sched">
+            <h1 style="margin:0 0 10px;">Próximos partidos</h1>
+
+            <!-- Viernes 17 de Octubre, 2025 -->
+            <h2>Viernes, 17 de Octubre, 2025</h2>
+            <div class="tbl-wrap">
+            <table class="fixture">
+                <thead>
+                <tr><th class="col-partido">PARTIDO</th><th class="col-hora">HORA</th><th class="col-lugar">LUGAR</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-partido">Racing Club vs Aldosivi</td>
+                    <td class="col-hora">7:00 PM</td>
+                    <td class="col-lugar">Presidente Perón (Cilindro de Avellaneda), Buenos Aires, Argentina</td>
+                </tr>
+                <tr class="map-row">
+                    <td colspan="3">
+                    <iframe class="map" loading="lazy"
+                        src="https://www.google.com/maps?q=Estadio%20Presidente%20Per%C3%B3n%20Avellaneda%20Argentina&output=embed"></iframe>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-partido">Argentinos Juniors vs Newell’s Old Boys</td>
+                    <td class="col-hora">9:15 PM</td>
+                    <td class="col-lugar">Diego Armando Maradona, Buenos Aires, Argentina</td>
+                </tr>
+                <tr class="map-row">
+                    <td colspan="3">
+                    <iframe class="map" loading="lazy"
+                        src="https://www.google.com/maps?q=Estadio%20Diego%20Armando%20Maradona%20Buenos%20Aires&output=embed"></iframe>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-partido">Lanús vs Godoy Cruz Antonio Tomba</td>
+                    <td class="col-hora">9:15 PM</td>
+                    <td class="col-lugar">Ciudad de Lanús, Buenos Aires, Argentina</td>
+                </tr>
+                <tr class="map-row">
+                    <td colspan="3">
+                    <iframe class="map" loading="lazy"
+                        src="https://www.google.com/maps?q=Estadio%20Ciudad%20de%20Lan%C3%BAs&output=embed"></iframe>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Sábado 18 de Octubre, 2025 -->
+            <h2>Sábado, 18 de Octubre, 2025</h2>
+            <div class="tbl-wrap">
+            <table class="fixture">
+                <thead>
+                <tr><th class="col-partido">PARTIDO</th><th class="col-hora">HORA</th><th class="col-lugar">LUGAR</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-partido">Independiente Rivadavia vs Banfield</td>
+                    <td class="col-hora">3:45 PM</td>
+                    <td class="col-lugar">Bautista Gargantini, Mendoza, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Bautista%20Gargantini%20Mendoza&output=embed"></iframe>
+                </td></tr>
+
+                <tr>
+                    <td class="col-partido">Boca Juniors vs Belgrano (Córdoba)</td>
+                    <td class="col-hora">6:00 PM</td>
+                    <td class="col-lugar">Alberto J. Armando (La Bombonera), Buenos Aires, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Alberto%20J%20Armando%20La%20Bombonera&output=embed"></iframe>
+                </td></tr>
+
+                <tr>
+                    <td class="col-partido">Talleres (Córdoba) vs River Plate</td>
+                    <td class="col-hora">10:15 PM</td>
+                    <td class="col-lugar">Mario Alberto Kempes, Córdoba, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Mario%20Alberto%20Kempes%20C%C3%B3rdoba&output=embed"></iframe>
+                </td></tr>
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Domingo 19 de Octubre, 2025 -->
+            <h2>Domingo, 19 de Octubre, 2025</h2>
+            <div class="tbl-wrap">
+            <table class="fixture">
+                <thead>
+                <tr><th class="col-partido">PARTIDO</th><th class="col-hora">HORA</th><th class="col-lugar">LUGAR</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-partido">Estudiantes de La Plata vs Gimnasia La Plata</td>
+                    <td class="col-hora">3:00 PM</td>
+                    <td class="col-lugar">Jorge Luis Hirschi, La Plata, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Jorge%20Luis%20Hirschi%20La%20Plata&output=embed"></iframe>
+                </td></tr>
+
+                <tr>
+                    <td class="col-partido">Sarmiento (Junín) vs Vélez Sarsfield</td>
+                    <td class="col-hora">3:00 PM</td>
+                    <td class="col-lugar">Eva Perón, Junín, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Eva%20Per%C3%B3n%20Jun%C3%ADn&output=embed"></iframe>
+                </td></tr>
+
+                <tr>
+                    <td class="col-partido">Rosario Central vs Platense</td>
+                    <td class="col-hora">6:00 PM</td>
+                    <td class="col-lugar">Gigante de Arroyito, Rosario, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Gigante%20de%20Arroyito%20Rosario&output=embed"></iframe>
+                </td></tr>
+
+                <tr>
+                    <td class="col-partido">San Martín (San Juan) vs Independiente</td>
+                    <td class="col-hora">6:00 PM</td>
+                    <td class="col-lugar">Hilario Sánchez, San Juan, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Hilario%20S%C3%A1nchez%20San%20Juan&output=embed"></iframe>
+                </td></tr>
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Lunes 20 de Octubre, 2025 -->
+            <h2>Lunes, 20 de Octubre, 2025</h2>
+            <div class="tbl-wrap">
+            <table class="fixture">
+                <thead>
+                <tr><th class="col-partido">PARTIDO</th><th class="col-hora">HORA</th><th class="col-lugar">LUGAR</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-partido">Deportivo Riestra vs Instituto (Córdoba)</td>
+                    <td class="col-hora">7:00 PM</td>
+                    <td class="col-lugar">Guillermo Laza, Buenos Aires, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Guillermo%20Laza%20Buenos%20Aires&output=embed"></iframe>
+                </td></tr>
+
+                <tr>
+                    <td class="col-partido">Tigre vs Barracas Central</td>
+                    <td class="col-hora">7:00 PM</td>
+                    <td class="col-lugar">José Dellagiovanna (Monumental de Victoria), Buenos Aires, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Jos%C3%A9%20Dellagiovanna%20Victoria&output=embed"></iframe>
+                </td></tr>
+
+                <tr>
+                    <td class="col-partido">Atlético Tucumán vs San Lorenzo</td>
+                    <td class="col-hora">9:15 PM</td>
+                    <td class="col-lugar">Monumental Presidente José Fierro, Tucumán, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Monumental%20Jos%C3%A9%20Fierro%20Tucum%C3%A1n&output=embed"></iframe>
+                </td></tr>
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Martes 21 de Octubre, 2025 -->
+            <h2>Martes, 21 de Octubre, 2025</h2>
+            <div class="tbl-wrap">
+            <table class="fixture">
+                <thead>
+                <tr><th class="col-partido">PARTIDO</th><th class="col-hora">HORA</th><th class="col-lugar">LUGAR</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-partido">Unión (Santa Fe) vs Defensa y Justicia</td>
+                    <td class="col-hora">7:15 PM</td>
+                    <td class="col-lugar">15 de Abril, Santa Fe, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%2015%20de%20Abril%20Santa%20Fe&output=embed"></iframe>
+                </td></tr>
+                </tbody>
+            </table>
+            </div>
+
+            <!-- Miércoles 22 de Octubre, 2025 -->
+            <h2>Miércoles, 22 de Octubre, 2025</h2>
+            <div class="tbl-wrap">
+            <table class="fixture">
+                <thead>
+                <tr><th class="col-partido">PARTIDO</th><th class="col-hora">HORA</th><th class="col-lugar">LUGAR</th></tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-partido">Huracán vs Central Córdoba (Santiago del Estero)</td>
+                    <td class="col-hora">7:30 PM</td>
+                    <td class="col-lugar">Tomás Adolfo Ducó, Buenos Aires, Argentina</td>
+                </tr>
+                <tr class="map-row"><td colspan="3">
+                    <iframe class="map" loading="lazy"
+                    src="https://www.google.com/maps?q=Estadio%20Tom%C3%A1s%20Adolfo%20Duc%C3%B3%20Buenos%20Aires&output=embed"></iframe>
+                </td></tr>
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Toggle de mapas ("Ver mapa" / "Ocultar mapa")
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-map');
+      if (!btn) return;
+      const map = document.getElementById(btn.dataset.map);
+      if (!map) return;
+      const show = !map.classList.contains('show');
+      document.querySelectorAll('.fx-map.show').forEach(m => m.classList.remove('show'));
+      if (show) map.classList.add('show');
+      btn.textContent = show ? 'Ocultar mapa' : 'Ver mapa';
+    });
+  </script>
+</body>
+</html>
