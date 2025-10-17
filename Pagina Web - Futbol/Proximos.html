@@ -317,19 +317,5 @@
     </section>
 
   </main>
-
-  <script>
-    // Toggle de mapas ("Ver mapa" / "Ocultar mapa")
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.btn-map');
-      if (!btn) return;
-      const map = document.getElementById(btn.dataset.map);
-      if (!map) return;
-      const show = !map.classList.contains('show');
-      document.querySelectorAll('.fx-map.show').forEach(m => m.classList.remove('show'));
-      if (show) map.classList.add('show');
-      btn.textContent = show ? 'Ocultar mapa' : 'Ver mapa';
-    });
-  </script>
 </body>
 </html>
