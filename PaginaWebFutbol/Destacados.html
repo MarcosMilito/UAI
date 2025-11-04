@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Clubes y Futbolistas Destacados | Fútbol para Todos</title>
-  <link rel="stylesheet" href="Styles.css">
+  <link rel="stylesheet" href="CSS/Styles.css">
 </head>
 <body>
   <header class="nav">
@@ -23,7 +23,7 @@
         <div>
           <h2 style="margin:0 0 10px 4px;">Goleadores</h2>
           <div class="tbl-wrap">
-            <table id="tbl-goles" class="stats">
+            <table id="tbl-goles" class="table">
               <thead>
                 <tr>
                   <th class="pos">POS</th>
@@ -42,7 +42,7 @@
         <div>
           <h2 style="margin:0 0 10px 4px;">Asistencias</h2>
           <div class="tbl-wrap">
-            <table id="tbl-asist" class="stats">
+            <table id="tbl-asist" class="table">
               <thead>
                 <tr>
                   <th class="pos">POS</th>
@@ -59,71 +59,6 @@
       </div>
     </section>
   </main>
-
-  <script>
-    const goleadores = [
-      {pos:1,  nombre:"Adrián Martínez", equipo:"Racing Club",     P:11, G:9},
-      {pos:2,  nombre:"Tomás Molina",    equipo:"Argentinos Jrs.", P:16, G:8},
-      {pos:3,  nombre:"Nicolás Fernández",equipo:"Belgrano (Córdoba)", P:18, G:8},
-      {pos:4,  nombre:"Gabriel Ávalos",  equipo:"Independiente",   P:16, G:7},
-      {pos:5,  nombre:"Andrés Vombergar",equipo:"San Lorenzo",     P:17, G:7},
-      {pos:6,  nombre:"Elías Torres",    equipo:"Racing Club",     P:18, G:6},
-      {pos:7,  nombre:"Miguel Merentiel",equipo:"Boca Juniors",    P:16, G:6},
-      {pos:8,  nombre:"Jhonatan Candia", equipo:"Barracas Central",P:14, G:6},
-      {pos:9,  nombre:"Alex Luna",       equipo:"Instituto (Cba.)",P:18, G:5},
-      {pos:10, nombre:"Ignacio Russo",   equipo:"Tigre",           P:16, G:5},
-      {pos:11, nombre:"Miguel Borja",    equipo:"River Plate",     P:16, G:5},
-      {pos:12, nombre:"Facundo Bruera",  equipo:"Barracas Central",P:16, G:5},
-      {pos:13, nombre:"Matko Miljevic",  equipo:"Huracán",         P:15, G:5},
-      {pos:14, nombre:"Leonardo Heredia",equipo:"Central Córdoba (SdE)", P:14, G:5},
-      {pos:15, nombre:"Gastón Togni",    equipo:"Defensa y Justicia", P:12, G:5},
-      {pos:16, nombre:"Sebastián Villa", equipo:"Indep. Rivadavia",P:16, G:4},
-      {pos:17, nombre:"Rodrigo Castillo",equipo:"Lanús",           P:16, G:4},
-      {pos:18, nombre:"Marcelino Moreno",equipo:"Lanús",           P:16, G:4},
-      {pos:19, nombre:"Lucas Gamba",     equipo:"Unión (Santa Fe)",P:16, G:4},
-      {pos:20, nombre:"Vicente Taborda", equipo:"Platense",        P:15, G:4},
-    ];
-
-    const asistencias = [
-      {pos:1,  nombre:"Sebastián Villa", equipo:"Independiente Rivadavia", P:16, A:4},
-      {pos:2,  nombre:"Luis Miguel Angulo",equipo:"Talleres (Córdoba)",    P:16, A:4},
-      {pos:3,  nombre:"Éver Banega",     equipo:"Newell's Old Boys",       P:15, A:4},
-      {pos:4,  nombre:"Gastón Martínez", equipo:"Racing Club",              P:14, A:4},
-      {pos:5,  nombre:"Víctor Malcorra", equipo:"Rosario Central",         P:12, A:4},
-      {pos:6,  nombre:"Javier Ruiz",     equipo:"Barracas Central",        P:11, A:4},
-      {pos:7,  nombre:"Leandro Lozano",  equipo:"Argentinos Juniors",      P:16, A:3},
-      {pos:8,  nombre:"Sasha Marcich",   equipo:"Lanús",                   P:16, A:3},
-      {pos:9,  nombre:"Alan Lescano",    equipo:"Argentinos Juniors",      P:16, A:3},
-      {pos:10, nombre:"Guido Mainero",   equipo:"Platense",                P:16, A:3},
-      {pos:11, nombre:"Emanuel Coronel", equipo:"Rosario Central",         P:16, A:3},
-      {pos:12, nombre:"Maximiliano Salas",equipo:"River Plate",            P:16, A:3},
-      {pos:13, nombre:"Miguel Merentiel",equipo:"Boca Juniors",            P:16, A:3},
-      {pos:14, nombre:"Felipe Loyola",   equipo:"Independiente",           P:15, A:3},
-      {pos:15, nombre:"Alexis Soto",     equipo:"Defensa y Justicia",      P:14, A:3},
-      {pos:16, nombre:"Jabes Saralegui", equipo:"Tigre",                   P:14, A:3},
-      {pos:17, nombre:"Elías Cabrera",   equipo:"Tigre",                   P:14, A:3},
-      {pos:18, nombre:"Carlos Palacios", equipo:"Boca Juniors",            P:13, A:3},
-      {pos:19, nombre:"Ramiro Ruiz Rodríguez", equipo:"Atlético Tucumán", P:12, A:3},
-      {pos:20, nombre:"Gonzalo Montiel", equipo:"River Plate",             P:12, A:3},
-    ];
-
-    function renderTabla(id, filas, key) {
-        const tb = document.querySelector('#' + id + ' tbody');
-        tb.innerHTML = '';
-        for (const r of filas) {
-        tb.innerHTML += `
-            <tr>
-            <td class="pos">${r.pos}</td>
-            <td>${r.nombre}</td>
-            <td>${r.equipo}</td>
-            <td class="num">${r.P}</td>
-            <td class="num"><strong>${r[key]}</strong></td>
-            </tr>`;
-        }
-    }
-
-    renderTabla('tbl-goles', goleadores, 'G');
-    renderTabla('tbl-asist', asistencias, 'A');
-  </script>
+  <script src="js/main.js" defer></script>
 </body>
 </html>
