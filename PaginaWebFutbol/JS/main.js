@@ -1,7 +1,7 @@
 /* =================== CONTACTO =================== */
 (function contactoModule () {
   const form = document.getElementById('frm-contacto');
-  if (!form) return; // si no hay form en la página, no hace nada
+  if (!form) return;
 
   const email = document.getElementById('email');
   const replyHidden = document.getElementById('replyto-hidden');
@@ -14,10 +14,10 @@
 
 /* ==================== TIENDA ==================== */
 (function tiendaModule () {
-  // Detectamos si estamos en la página de Tienda por cualquiera de estos ids
+
   const el = (id) => document.getElementById(id);
   const grid = el('store-grid') || el('grid') || el('tienda-root');
-  if (!grid) return; // si no hay grilla, no estamos en Tienda
+  if (!grid) return;
 
   // Utils
   const $ = (s, ctx=document) => ctx.querySelector(s);
@@ -25,7 +25,6 @@
   const ARS = n => n.toLocaleString('es-AR', { style:'currency', currency:'ARS', maximumFractionDigits:0 });
   const randInt = (min,max) => Math.floor(Math.random()*(max-min+1))+min;
 
-  // Tu catálogo base (SIN CAMBIOS)
   const base = [
     {id:1,  name:'Camiseta Titular 24/25 - River Plate', type:'camiseta', img:'https://celadasa.vtexassets.com/arquivos/ids/561570-800-auto?v=638852494792630000&width=800&height=auto&aspect=true'},
     {id:2,  name:'Camiseta Alternativa Club - River Plate', type:'camiseta', img:'https://sevensportio.vtexassets.com/arquivos/ids/401683-800-auto?v=638623678090300000&width=800&height=auto&aspect=true'},
@@ -125,7 +124,7 @@
   const payBtn    = el('checkout');
 
   function renderCart(){
-    if (!cartList || !cartTotal) return; // por si en tu HTML cambió el id
+    if (!cartList || !cartTotal) return;
 
     if(cart.length===0){
       cartList.innerHTML = '<p style="color:#cbd5e1">Tu carrito está vacío.</p>';
@@ -176,7 +175,6 @@
     alert(`Resumen de compra:\n\n${detalle}\n\nTotal: ${cartTotal.textContent}\n\n*Demo sin pago online.*`);
   });
 
-  // Exponer helpers que usa el HTML inline
   window.changeQty = changeQty;
   window.removeFromCart = removeFromCart;
 })();
@@ -185,7 +183,7 @@
 (function destacadosModule () {
   const tblG = document.getElementById('tbl-goles');
   const tblA = document.getElementById('tbl-asist');
-  if (!tblG && !tblA) return; // si no están las tablas, no corre
+  if (!tblG && !tblA) return;
 
   const goleadores = [
     {pos:1,  nombre:"Adrián Martínez", equipo:"Racing Club",     P:11, G:9},
