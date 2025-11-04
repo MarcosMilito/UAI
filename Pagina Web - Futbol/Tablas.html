@@ -4,77 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Tabla Anual | Fútbol para Todos</title>
-  <style>
-    :root{
-      --text:#e5e7eb;
-      --muted:#cbd5e1;
-      --brand:#0b57d0;
-      --panel: rgba(17, 24, 39, .66);
-      --panel-border: rgba(148, 163, 184, .28);
-      --radius:16px;
-      --max:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      background:
-        linear-gradient(rgba(0,0,0,.25), rgba(0,0,0,.25)),
-        url("https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg") center/cover fixed no-repeat;
-      color:var(--text);
-      font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
-    }
-
-    /* Header */
-    .nav{
-      position:sticky; top:0; z-index:50;
-      background:#130e0ecc; backdrop-filter: blur(6px);
-      border-bottom:1px solid #2b2f36;
-    }
-    .nav__inner{
-      max-width:var(--max); margin:0 auto; padding:10px 16px;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.3px;}
-    .brand__dot{width:10px; height:10px; border-radius:999px; background:var(--brand);}
-    .nav a{color:var(--text); text-decoration:none; padding:8px 10px; border-radius:10px;}
-    .nav a:hover{background:rgba(255,255,255,.08);}
-
-    /* Contenido */
-    .wrap{max-width:var(--max); margin:18px auto 28px; padding:0 16px;}
-    .panel{
-      background:var(--panel); border:1px solid;
-      border-radius:var(--radius); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-      padding:16px;
-    }
-
-    /* Tabla */
-    .table-wrap{ overflow:auto; border-radius:12px; margin-top:8px; }
-    table{ width:100%; border-collapse:collapse; min-width:760px; color:var(--text); }
-    thead th{
-      position:sticky; top:0; z-index:2; background:rgba(2,6,23,.85); backdrop-filter:blur(6px);
-      text-align:left; font-weight:700; font-size:14px;
-      padding:10px 12px; border-bottom:1px solid var(--panel-border);
-      cursor:pointer; user-select:none;
-    }
-    tbody td{
-      padding:8px 12px; font-size:14px; border-bottom:1px solid rgba(148,163,184,.18);
-    }
-    tbody tr:hover{ background: rgba(255,255,255,.04); }
-    .pos{ width:48px; text-align:center; font-weight:700; }
-    .equipo{ display:flex; align-items:center; gap:10px; }
-    .num{ text-align:right; }
-    .badge{
-      display:inline-block; font-size:11px; font-weight:800; letter-spacing:.3px;
-      padding:4px 8px; border-radius:999px; color:#0b1220; background:#93c5fd;
-    }
-    .forma{ display:flex; gap:4px; }
-    .forma span{
-      display:inline-block; width:18px; height:18px; line-height:18px; text-align:center;
-      border-radius:4px; font-size:11px; font-weight:800; color:#0b1220;
-    }
-
-  </style>
+  <link rel="stylesheet" href="Styles.css">
 </head>
 <body>
 
@@ -82,7 +12,7 @@
     <div class="nav__inner">
       <div class="brand"><span class="brand__dot"></span> Fútbol para Todos</div>
       <nav>
-        <a href="index.html">Volver a la portada</a>
+        <a href="Index.html">Volver a la portada</a>
       </nav>
     </div>
   </header>
@@ -220,6 +150,4 @@
   </main>
 
 </body>
-
 </html>
-
