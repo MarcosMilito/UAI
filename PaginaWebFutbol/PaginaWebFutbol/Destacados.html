@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clubes y Futbolistas Destacados | Fútbol para Todos</title>
+  <link rel="stylesheet" href="CSS/Styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="brand"><span class="brand__dot"></span> Fútbol para Todos</div>
+      <nav><a href="index.html">Volver a la portada</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="panel">
+      <h1>Clubes y futbolistas destacados</h1>
+
+      <div class="grid">
+        <!-- GOLEADORES -->
+        <div>
+          <h2 style="margin:0 0 10px 4px;">Goleadores</h2>
+          <div class="tbl-wrap">
+            <table id="tbl-goles" class="table">
+              <thead>
+                <tr>
+                  <th class="pos">POS</th>
+                  <th>NOMBRE</th>
+                  <th>EQUIPO</th>
+                  <th class="num">P</th>
+                  <th class="num">G</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ASISTENCIAS -->
+        <div>
+          <h2 style="margin:0 0 10px 4px;">Asistencias</h2>
+          <div class="tbl-wrap">
+            <table id="tbl-asist" class="table">
+              <thead>
+                <tr>
+                  <th class="pos">POS</th>
+                  <th>NOMBRE</th>
+                  <th>EQUIPO</th>
+                  <th class="num">P</th>
+                  <th class="num">A</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/main.js" defer></script>
+</body>
+</html>

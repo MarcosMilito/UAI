@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fútbol para Todos</title>
+  <meta name="description" content="Sitio para fanáticos del fútbol: noticias, clubes, fixtures, tablas y tienda." />
+  <link rel="preload" href="CSS/Styles.css" as="style">
+  <link rel="stylesheet" href="CSS/Styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="nav__inner">
+      <div class="brand"><span class="brand__dot" aria-hidden="true"></span> Fútbol para Todos</div>
+      <nav aria-label="Principal">
+        <a href="#sobre">Sobre nosotros</a>
+        <a href="#video">Video</a>
+        <a href="#clubes">Clubes</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="ttl-hero">
+    <div class="hero__card">
+      <h1 id="ttl-hero">Fútbol para Todos</h1>
+      <p>El sitio web que elige la gente.</p>
+    </div>
+  </section>
+
+  <main id="contenido">
+    <!-- SOBRE NOSOTROS -->
+    <section id="sobre" class="section" aria-labelledby="ttl-sobre">
+      <div class="card">
+        <h2 id="ttl-sobre">Sobre nosotros</h2>
+        <p class="lead">
+          Bienvenidos a <strong>Fútbol para Todos</strong>, el sitio donde los amantes del fútbol encuentran información
+          sobre sus <strong>equipos, jugadores</strong> y <strong>ligas favoritas</strong>. Creemos que el fútbol es más que un deporte:
+          es una pasión que une al mundo. Brindamos contenido actualizado, análisis y noticias para disfrutar al máximo
+          la experiencia futbolística.
+        </p>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section id="video" class="section" aria-labelledby="ttl-video">
+      <div class="card">
+        <h2 id="ttl-video">Video</h2>
+        <div class="video-wrap">
+          <video controls preload="metadata" src="videoplayback.mp4"></video>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLUBES -->
+    <section id="clubes" class="section" aria-labelledby="ttl-clubes">
+      <div class="card">
+        <h2 id="ttl-clubes">Información sobre los clubes</h2>
+        <iframe class="frame" src="Clubes.html" title="Sección clubes" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- CONTACTO (Formspree) -->
+    <section id="contacto" class="section" aria-labelledby="ttl-contacto">
+      <div class="card">
+        <h2 id="ttl-contacto">Contacto</h2>
+        <p class="lead" style="max-width:none">
+          Si tenés alguna consulta, sugerencia o algo para sumar, escribinos y te respondemos a la brevedad.
+        </p>
+
+        <form id="frm-contacto"
+              class="form"
+              action="https://formspree.io/f/mjkpqarb"
+              method="POST"
+              novalidate>
+          <div>
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="Nombre" class="input" type="text" placeholder="Tu nombre" required aria-required="true">
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="Email" class="input" type="email" placeholder="tunombre@correo.com" required aria-required="true">
+          </div>
+          <div class="full">
+            <label for="asunto">Asunto</label>
+            <input id="asunto" name="Asunto" class="input" type="text" placeholder="Tema del mensaje" required aria-required="true">
+          </div>
+          <div class="full">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="Mensaje" class="textarea" placeholder="Contanos en qué podemos ayudarte" required aria-required="true"></textarea>
+          </div>
+
+          <div class="full form-actions">
+            <button class="btn" type="submit">Enviar</button>
+            <span class="muted">También podés escribirnos a <strong>marcos.milito03@gmail.com</strong></span>
+          </div>
+
+          <input type="hidden" name="_replyto" value="" id="replyto-hidden">
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">© 2025 Fútbol para Todos</footer>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
