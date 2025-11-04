@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Tienda | Fútbol para Todos</title>
+  <link rel="stylesheet" href="Styles.css">
+</head>
+<body>
+  <!-- NAV común -->
+  <header class="nav">
+    <div class="nav__inner">
+      <div class="brand"><span class="brand__dot"></span> Fútbol para Todos</div>
+      <nav>
+        <a href="Index.html">Inicio</a>
+        <a href="Clubes.html" target="_blank" rel="noopener">Clubes</a>
+        <a href="Destacados.html" target="_blank" rel="noopener">Destacados</a>
+        <a href="Tablas.html" target="_blank" rel="noopener">Tabla anual</a>
+        <a href="Proximos.html" target="_blank" rel="noopener">Próximos</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- GRID DE PRODUCTOS -->
+  <main class="section" id="productos">
+    <div class="panel">
+      <h2 style="margin:0 0 10px;">Productos</h2>
+      <div id="grid" class="shop-grid"></div>
+    </div>
+  </main>
+
+  <!-- CARRITO SIMPLE EN LA MISMA PÁGINA -->
+  <section class="section">
+    <div class="panel">
+      <h2 style="margin:0 0 10px;">Carrito</h2>
+      <div id="cartItems" class="cart__items" style="display:flex; flex-direction:column; gap:10px;"></div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:10px;">
+        <strong>Total:</strong>
+        <strong id="cartTotal">$ 0</strong>
+      </div>
+      <div style="margin-top:10px; display:flex; gap:10px;">
+        <button id="clearCart" class="btn btn-secondary" type="button">Vaciar carrito</button>
+        <button id="checkout" class="btn" type="button">Ir a pagar</button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // ========= Utilidades básicas =========
+    const $ = (s, ctx=document)=>ctx.querySelector(s);
+    const $$ = (s, ctx=document)=>[...ctx.querySelectorAll(s)];
+    const ARS = n => n.toLocaleString('es-AR',{style:'currency',currency:'ARS',maximumFractionDigits:0});
+    const randInt = (min,max)=> Math.floor(Math.random()*(max-min+1))+min;
+
+    // ========= Datos de la interfaz =========
+    // Solo definimos nombre, tipo e imagen. El precio y los talles se generan con JS.
+    const base = [
+        {id:1,  name:'Camiseta Titular 24/25 - River Plate',          type:'camiseta',     img:'https://celadasa.vtexassets.com/arquivos/ids/561570-800-auto?v=638852494792630000&width=800&height=auto&aspect=true'},
+        {id:2,  name:'Camiseta Alternativa Club - River Plate',       type:'camiseta',     img:'https://sevensportio.vtexassets.com/arquivos/ids/401683-800-auto?v=638623678090300000&width=800&height=auto&aspect=true'},
+        {id:3,  name:'Buzo Entrenamiento - Boca Juniors',              type:'buzo',       img:'https://redsport.vtexassets.com/arquivos/ids/1210784/BUZO-ADIDAS-ENTRENAMIENTO-CON-CAPUCHA-DE-BOCA-JUNIORS-TIRO-25-COMPETITION.jpg?v=638863726452100000'},
+        {id:4,  name:'Campera Rompeviento - Independiente de Avellaneda',             type:'campera',    img:'https://newsport.vtexassets.com/arquivos/ids/19635759-800-auto?v=638671200145070000&width=800&height=auto&aspect=true'},
+        {id:5,  name:'Botines Adidas 2019',              type:'botines', img:'https://img.pacifiko.com/PROD/resize/1/500x500/YTNkYzE1MT_1_1747626012.jpeg'},
+        {id:6,  name:'Nike Mercurial Superfly 10 Elit',             type:'botines', img:'https://nikearprod.vtexassets.com/arquivos/ids/1328463-1200-1200?width=1200&height=1200&aspect=true'},
+        {id:7,  name:'Jordan',             type:'accesorio',  img:'https://nikearprod.vtexassets.com/arquivos/ids/1214615-1000-1000?v=638664360417430000&width=1000&height=1000&aspect=true'},
+        {id:8,  name:'Nike DriFIT Rise',   type:'accesorio',  img:'https://nikearprod.vtexassets.com/arquivos/ids/732079-1200-1200?width=1200&height=1200&aspect=true'},
+
+        {id:9,  name:'Camiseta Retro 90s - Racing Club',              type:'camiseta',     img:'https://acdn-us.mitiendanube.com/stores/001/312/744/products/faetsrytyuserdytyiuu1-55a7fb9ffe53c3341b16759090524205-640-0.jpg'},
+        {id:10, name:'Rosario Central - Buzo Tiempo Libre',         type:'buzo',     img:'https://lecoqsportif.com.ar/wp-content/uploads/2025/01/LTN0225182-1-scaled.jpg'},
+        {id:11, name:'Camiseta Visitante 24/25 - Riestra',        type:'camiseta',     img:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxK2FodWapIqTKJNP833JXmlQq1f7c5IC1uA&s'},
+
+        {id:12, name:'Buzo Canguro - River Plate',               type:'buzo',       img:'https://www.digitalsport.com.ar/files/products/572d0f8d91db0-372283-1200x1200.jpg'},
+        {id:13, name:'Buzo Técnico con Cierre - Talleres de Cordoba',         type:'buzo',       img:'https://newsport.vtexassets.com/arquivos/ids/20405228-800-auto?v=638869959700200000&width=800&height=auto&aspect=true'},
+        {id:14, name:'Buzo Termico - Boca Juniors',                type:'buzo',       img:'https://powersport.com.ar/wp-content/uploads/2023/07/190.jpg'},
+
+        {id:15, name:'Campera Impermeable - Racing Club',             type:'campera',    img:'https://locademia.racingclub.com.ar/Image/0/2000_2000-campera_con_capucha_negra_talle_S_10.jpg'},
+        {id:16, name:'Campera Puffer Ligera - Rosario Central',           type:'campera',    img:'https://acdn-us.mitiendanube.com/stores/001/165/935/products/campera_abrigo_rosario_central_adm_short_jacket_negro_homber_lto0225384-2-4ff206c1d86f68bfd417541503513118-1024-1024.jpg'},
+        {id:17, name:'Campera Técnica Windstopper - River Plate',     type:'campera',    img:'https://www.digitalsport.com.ar/files/products/5c7fc270a4045-469168-500x500.jpg'},
+
+        {id:18, name:'Zapatillas Running Pro',          type:'zapatillas', img:'https://www.stockcenter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dw8872d807/products/PU379383-01/PU379383-01-6.JPG'},
+        {id:19, name:'Zapatillas Street Classic',       type:'zapatillas', img:'https://sevensportio.vtexassets.com/arquivos/ids/502411-800-auto?v=638838595148430000&width=800&height=auto&aspect=true'},
+        {id:20, name:'Zapatillas Turf Fútbol',          type:'zapatillas', img:'https://http2.mlstatic.com/D_NQ_NP_742223-CBT89411532910_082025-O.webp'},
+
+        {id:21, name:'Camiseta Entrenamiento Manga Larga - Independiente de Avellaneda', type:'camiseta',  img:'https://images.puma.com/image/upload/f_auto,q_auto,w_600,b_rgb:FAFAFA/global/713917/01/fnd/ARG/fmt/png'},
+        {id:22, name:'Remera Pre-Match - Velez',                type:'camiseta',     img:'https://acdn-us.mitiendanube.com/stores/268/104/products/prematch-azul-escudo-nuevo-sin-saphirus-01-578013170061e3f09a17531947033992-1024-1024.webp'},
+
+        {id:23, name:'Buzo de Entrenamiento - Argentinos Juniors',             type:'buzo',       img:'https://newsport.vtexassets.com/arquivos/ids/20435099/3AJ160015422-A.jpg?v=638881173811230000'},
+        {id:24, name:'Musculosa - Boca Juniors',            type:'remera',       img:'https://bocashop.vteximg.com.br/arquivos/ids/171712-1000-1000/JP3311_1.jpg?v=638852162293300000'},
+
+        {id:25, name:'Campera Rompeviento - Boca Juniors',  type:'campera',    img:'https://www.dexter.com.ar/on/demandware.static/-/Sites-365-dabra-catalog/default/dw61675cf5/products/ADIS5589/ADIS5589-1.JPG'},
+        {id:26, name:'Camiseta Titular 24/25 - Velez',               type:'camiseta',    img:'https://acdn-us.mitiendanube.com/stores/268/104/products/home25-escudo-nuevo-01-50d485882c267d786417449237462403-1024-1024.jpg'},
+
+        {id:27, name:'Zapatillas Indoor Court',         type:'zapatillas', img:'https://rossettiar.vtexassets.com/arquivos/ids/1859002-800-auto?v=638697235620930000&width=800&height=auto&aspect=true'},
+        {id:28, name:'Medias Deportivas - Pony',          type:'accesorio', img:'https://pony.ar/media/catalog/product/cache/0457824bba97e1f5f9a1743c78116b86/0/6/06-06-24_pony_medias_hombre0026r.jpg'},
+
+        {id:29, name:'Canilleras Pro Adidas',                  type:'accesorio',  img:'https://assets.adidas.com/images/w_600,f_auto,q_auto/79215dcb57d44e2893f19b3a51f5429e_9366/Canilleras_Tiro_Club_Blanco_IP3995_01_standard.jpg'},
+        {id:30, name:'Guantes Arquero DRB Unisex Estadios 24 -River Plate',                type:'accesorio',  img:'https://www.bompie.com.ar/media/catalog/product/cache/1e7c11b43132c034d445b386916b52f7/1/9/198-47847b.jpg'}
+    ];
+
+    // Rangos de precios por tipo (ARS)
+    const priceRange = {
+      remera:[45000,120000], camiseta:[45000,120000],
+      buzo:[60000,160000], campera:[80000,220000],
+      zapatillas:[90000,300000], botines:[120000,350000],
+      accesorio:[8000,40000]
+    };
+
+    // Talles por tipo
+    const sizesRopa = ['S','M','L'];
+    const sizesCalzado = ['38','39','40','41','42'];
+
+    // Devuelve 2 o 3 talles random según el tipo
+    function randomSizes(type){
+      const calzado = (type==='zapatillas' || type==='botines');
+      const pool = calzado ? sizesCalzado : sizesRopa;
+      const count = randInt(2,3);
+      return pool.slice().sort(()=>Math.random()-0.5).slice(0,count);
+    }
+    // Devuelve un precio random según el tipo
+    function randomPrice(type){
+      const [min,max] = priceRange[type] || [20000,80000];
+      return randInt(min,max);
+    }
+
+    // Catálogo final con precio y talles ya generados
+    const catalog = base.map(p => ({
+      ...p,
+      price: randomPrice(p.type),
+      sizes: randomSizes(p.type)
+    }));
+
+    // ========= Render de productos =========
+    const grid = $('#grid');
+    function renderProducts(){
+      grid.innerHTML = catalog.map(p => `
+        <article class="product" data-id="${p.id}">
+          <a class="product-img" style="background-image:url('${p.img}')" href="#" aria-label="${p.name}"></a>
+          <h3 class="product-title">${p.name}</h3>
+          <p class="product-sub">${p.type[0].toUpperCase()+p.type.slice(1)}</p>
+
+          <div class="product-meta">
+            <span class="price">${ARS(p.price)}</span>
+            <div class="buy">
+              <select class="select size">
+                <option value="">Talle</option>
+                ${p.sizes.map(s=>`<option value="${s}">${s}</option>`).join('')}
+              </select>
+              <button class="btn add" type="button">Agregar</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+
+      // Click en "Agregar"
+      $$('.product .add').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const card = btn.closest('.product');
+          const id = +card.dataset.id;
+          const prod = catalog.find(x=>x.id===id);
+          const size = card.querySelector('.size').value;
+          if(!size){ alert('Elegí un talle.'); return; }
+          addToCart({ id: prod.id, name: prod.name, price: prod.price, size, img: prod.img });
+        });
+      });
+    }
+    renderProducts();
+
+    // ========= Carrito =========
+    let cart = []; // [{id,name,price,size,img,qty}]
+
+    function addToCart(item){
+      const i = cart.findIndex(x => x.id===item.id && x.size===item.size);
+      if(i>-1) cart[i].qty += 1;
+      else cart.push({...item, qty:1});
+      renderCart();
+    }
+
+    function removeFromCart(id,size){
+      cart = cart.filter(x => !(x.id===id && x.size===size));
+      renderCart();
+    }
+
+    function changeQty(id,size,delta){
+      const it = cart.find(x => x.id===id && x.size===size);
+      if(!it) return;
+      it.qty = Math.max(1, it.qty + delta);
+      renderCart();
+    }
+
+    function renderCart(){
+      const list = $('#cartItems');
+      if(cart.length===0){
+        list.innerHTML = '<p style="color:#cbd5e1">Tu carrito está vacío.</p>';
+        $('#cartTotal').textContent = ARS(0);
+        return;
+      }
+      list.innerHTML = cart.map(it => `
+        <div class="ci" style="display:flex; gap:10px; align-items:center; border:1px solid var(--panel-border); border-radius:12px; padding:10px; background:rgba(255,255,255,.04);">
+          <div style="width:60px; height:60px; background-image:url('${it.img}'); background-size:cover; background-position:center; border-radius:10px;"></div>
+          <div style="flex:1;">
+            <div style="font-weight:700;">${it.name}</div>
+            <div style="color:var(--muted); font-size:13px;">Talle <strong>${it.size}</strong> · ${ARS(it.price)}</div>
+            <div style="margin-top:6px; display:flex; gap:8px; align-items:center;">
+              <button onclick="changeQty(${it.id}, '${it.size}', -1)" class="qbtn">−</button>
+              <span>${it.qty}</span>
+              <button onclick="changeQty(${it.id}, '${it.size}', 1)" class="qbtn">+</button>
+              <button onclick="removeFromCart(${it.id}, '${it.size}')" class="btn btn-secondary">Quitar</button>
+            </div>
+          </div>
+        </div>
+      `).join(''); /*Genera la imagen del producto en el carrito con su estilo propio*/
+
+      const total = cart.reduce((acc, it)=> acc + it.price * it.qty, 0);
+      $('#cartTotal').textContent = ARS(total);
+    }
+
+    // Botones del carrito
+    $('#clearCart').addEventListener('click', ()=>{
+      cart = [];
+      renderCart();
+    });
+
+    $('#checkout').addEventListener('click', ()=>{
+      if(cart.length===0){ alert('Tu carrito está vacío.'); return; }
+
+      const detalle = cart.map(i => `${i.qty}× ${i.name} (Talle ${i.size}) - ${ARS(i.price*i.qty)}`).join('\n');
+      alert(`Resumen de compra:\n\n${detalle}\n\nTotal: ${$('#cartTotal').textContent}\n\n*Demo sin pago online.*`);
+    });
+
+    window.changeQty = changeQty;
+    window.removeFromCart = removeFromCart;
+  </script>
+</body>
+</html>
